@@ -10,15 +10,10 @@ pipeline {
 
                 steps{
 
-                    script{
-
                         GitCheckout(
                             branch : "main",
                             url : "https://github.com/nagamanigowda/jenkins_repo.git"
                         )
-                        
-                    }
-
                 }
             }
 
