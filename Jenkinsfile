@@ -2,15 +2,15 @@ pipeline {
 
     agent any 
 
-        stages{
+        stages {
 
-            stage{'Git Checkout'} {
+            stage('Git Checkout'){
 
                 steps{
 
                     script{
 
-                        git branch: 'main', url: 'https://github.com/nagamanigowda/jenkins_repo/'
+                        git branch: 'main', url: 'https://github.com/nagamanigowda/jenkins_repo.git'
                     }
 
                 }
