@@ -4,16 +4,16 @@ pipeline {
 
     agent any
 
-        """parameters{
+        //parameters{
 
-             choice(name = 'action', choices='create\ndelete', description='create or destroy')
-        }
-         """
+        //     choice(name = 'action', choices='create\ndelete', description='create or destroy')
+        //}
+         
         stages {
 
             stage('Git Checkout'){
 
-            """when {expression {params.action == 'create'}}"""
+            //when {expression {params.action == 'create'}}
 
                 steps{
 
@@ -26,7 +26,7 @@ pipeline {
 
             stage('Unit Test maven'){
 
-            """when {expression {params.action == 'create'}}"""
+            //when {expression {params.action == 'create'}}
 
                 steps{
 
@@ -41,7 +41,7 @@ pipeline {
         
         stage('Integration Test maven'){
                
-        """when {expression {params.action == 'create'}}"""
+        //when {expression {params.action == 'create'}}
                            
                 steps{
 
@@ -56,7 +56,7 @@ pipeline {
 
         stage('static code analysis:sonarqube'){
                
-        """when {expression {params.action == 'create'}}"""
+        //when {expression {params.action == 'create'}}
                            
                 steps{
 
