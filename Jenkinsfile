@@ -12,7 +12,7 @@ pipeline {
                     script{
 
                         GitCheckout(
-                            branch : "main"
+                            branch : "main",
                             url : "https://github.com/nagamanigowda/jenkins_repo.git"
                         )
                         
