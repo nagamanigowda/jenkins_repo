@@ -1,8 +1,9 @@
+@Library('my-shared-library') _
 pipeline {
 
     agent any 
 
-        stages {
+        stagegit {
 
             stage('Git Checkout'){
 
@@ -10,7 +11,11 @@ pipeline {
 
                     script{
 
-                        git branch: 'main', url: 'https://github.com/nagamanigowda/jenkins_repo.git'
+                        GitCheckout(
+                            branch : "main"
+                            url : "https://github.com/nagamanigowda/jenkins_repo.git"
+                        )
+                        
                     }
 
                 }
