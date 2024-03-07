@@ -126,12 +126,27 @@ pipeline {
 
                     script{
 
-                        DockerimageScan("${params.ImageName}", "${params.TagName}", "${params.DockerhubName}")
+                        DockerimageS("${params.ImageName}", "${params.TagName}", "${params.DockerhubName}")
 
                     }
 
                 }
-            }                     
+            } 
+
+            stage('Docker Image Push: Dockehub'){
+
+            //when {expression {params.action == 'create'}}
+
+                steps{
+
+                    script{
+
+                        DockerImagePush("${params.ImageName}", "${params.TagName}", "${params.DockerhubName}")
+
+                    }
+
+                }
+            }                          
         }
     
 }
