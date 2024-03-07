@@ -62,7 +62,7 @@ pipeline {
 
                     script{
 
-                        statisCodeAnalysis()
+                        staticCodeAnalysis()
                         
                     }
 
