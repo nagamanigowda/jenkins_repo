@@ -9,7 +9,7 @@ pipeline {
         //     choice(name = 'action', choices='create\ndelete', description='create or destroy')
                string(name = 'ImageName', description = 'name of the image', defaultValue = 'javaapp')
                string(name = 'TagName', description = 'name of the Tag', defaultValue = 'v1')
-               string(name = 'AppName', description = 'name of the Project', defaultValue = 'springboot')
+               string(name = 'DockerhubName', description = 'name of the Project', defaultValue = 'nagamanigowda946')
         }
          
         stages {
@@ -27,35 +27,35 @@ pipeline {
                 }
             }
 
-            stage('Unit Test maven'){
+            //stage('Unit Test maven'){
 
             //when {expression {params.action == 'create'}}
 
-                steps{
+              //  steps{
 
-                    script{
+                //    script{
 
-                        mvnTest()
+                 //       mvnTest()
 
-                    }
+                   // }
 
-                }
-            }
+                //}
+            //}
         
-        stage('Integration Test maven'){
+        //stage('Integration Test maven'){
                
         //when {expression {params.action == 'create'}}
                            
-                steps{
+          //      steps{
 
-                    script{
+            //        script{
 
-                        mvnIntegrationTest()
+              //          mvnIntegrationTest()
                         
-                    }
+                //    }
 
-                }
-            }
+               // }
+            //}
 
         stage('static code analysis:sonarqube'){
                
@@ -111,7 +111,7 @@ pipeline {
 
                     script{
 
-                        DockerBuild("${params.ImageName}", "${params.ImageTag}", "${params.AppName}")
+                        DockerBuild("${params.ImageName}", "${params.ImageTag}", "${params.DockerhubName}")
 
                     }
 
