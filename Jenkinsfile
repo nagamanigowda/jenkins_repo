@@ -57,37 +57,37 @@ pipeline {
                // }
             //}
 
-        stage('static code analysis:sonarqube'){
+        //stage('static code analysis:sonarqube'){
                
         //when {expression {params.action == 'create'}}
                            
-                steps{
+                // steps{
 
-                    script{
+                //     script{
                         
-                        def sonarqubecredentialId = 'my-sonar'
-                        staticCodeAnalysis(sonarqubecredentialId)
+                    //     def sonarqubecredentialId = 'my-sonar'
+                    //     staticCodeAnalysis(sonarqubecredentialId)
                         
-                    }
+                    // }
 
-                }
-            } 
+        //        }
+          //  } 
 
-        stage('Quality Gate Status:sonarqube'){
+        //stage('Quality Gate Status:sonarqube'){
                
         //when {expression {params.action == 'create'}}
                            
-                steps{
+            //     steps{
 
-                    script{
+            //         script{
                         
-                        def sonarqubecredentialId = 'my-sonar'
-                        QualityGateStatus(sonarqubecredentialId)
+            //             def sonarqubecredentialId = 'my-sonar'
+            //             QualityGateStatus(sonarqubecredentialId)
                         
-                    }
+            //         }
 
-                }
-            }
+            //     }
+            // }
         stage('Maven Build: maven'){
 
             //when {expression {params.action == 'create'}}
@@ -111,12 +111,27 @@ pipeline {
 
                     script{
 
-                        DockerBuild("${params.ImageName}", "${params.ImageTag}", "${params.DockerhubName}")
+                        DockerBuild("${params.ImageName}", "${params.TagName}", "${params.DockerhubName}")
 
                     }
 
                 }
-            }               
+            } 
+
+            stage('Docker Scan: Trivy'){
+
+            //when {expression {params.action == 'create'}}
+
+                steps{
+
+                    script{
+
+                        DockerimageScan("${params.ImageName}", "${params.TagName}", "${params.DockerhubName}")
+
+                    }
+
+                }
+            }                     
         }
     
 }
