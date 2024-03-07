@@ -4,10 +4,13 @@ pipeline {
 
     agent any
 
-        //parameters{
+        parameters{
 
         //     choice(name = 'action', choices='create\ndelete', description='create or destroy')
-        //}
+               string(name = 'ImageName', description = 'name of the image', defaultValue = 'javaapp')
+               string(name = 'TagName', description = 'name of the Tag', defaultValue = 'v1')
+               string(name = 'AppName', description = 'name of the Project', defaultValue = 'springboot')
+        }
          
         stages {
 
@@ -99,7 +102,21 @@ pipeline {
 
                 }
             }
-                       
+
+        stage('Docker Build: Docker'){
+
+            //when {expression {params.action == 'create'}}
+
+                steps{
+
+                    script{
+
+                        DockerBuild("${params.ImageName}", "${params.ImageTag}", "${params.AppName}")
+
+                    }
+
+                }
+            }               
         }
     
 }
