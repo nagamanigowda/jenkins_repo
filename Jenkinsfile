@@ -133,20 +133,20 @@ pipeline {
                 }
             } 
 
-            stage('Docker Image Push: Dockehub'){
+            // stage('Docker Image Push: Dockehub'){
 
-            //when {expression {params.action == 'create'}}
+            // //when {expression {params.action == 'create'}}
 
-                steps{
+            //     steps{
 
-                    script{
+            //         script{
 
-                        DockerImagePush("${params.ImageName}", "${params.TagName}", "${params.DockerhubName}")
+            //             DockerImagePush("${params.ImageName}", "${params.TagName}", "${params.DockerhubName}")
 
-                    }
+            //         }
 
-                }
-            }                          
+            //     }
+            // }                          
         }
     
 }
