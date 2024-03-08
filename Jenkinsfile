@@ -146,7 +146,22 @@ pipeline {
                      }
 
                  }
-             }                          
+             } 
+
+             stage('Docker Image Cleanup: Local'){
+
+             //when {expression {params.action == 'create'}}
+
+                 steps{
+
+                     script{
+
+                         DockerImageCleanup("${params.ImageName}", "${params.TagName}", "${params.DockerhubName}")
+
+                     }
+
+                 }
+             }                                
         }
     
 }
