@@ -7,7 +7,7 @@ pipeline {
         parameters{
 
         //     choice(name = 'action', choices='create\ndelete', description='create or destroy')
-               string(name: 'Iaws_account_id', description: 'AWS ACCOUNT ID', defaultValue: '402213359600')
+               string(name: 'aws_account_id', description: 'AWS ACCOUNT ID', defaultValue: '402213359600')
                string(name :'region', description :'aws region ', defaultValue :'us-east-1')
                string(name :'ecr_repo_name', description : 'ECR repository name', defaultValue :'nagamani.n')
 
@@ -116,4 +116,52 @@ pipeline {
                     }
 
                 }
-        }    
+        } 
+
+        stage('Docker Image Scan: Trivy'){
+
+            //when {expression {params.action == 'create'}}
+
+                steps{
+
+                    script{
+
+                        DockerImageScan("${params.aws_account_id}", "${params.region}", "${params.ecr_repo_name}")
+                        
+                    }
+
+                }
+        }
+
+        stage('Docker Image Push: ECR'){
+
+            //when {expression {params.action == 'create'}}
+
+                steps{
+
+                    script{
+
+                        DockerImagePush("${params.aws_account_id}", "${params.region}", "${params.ecr_repo_name}")
+                        
+                    }
+
+                }
+        }
+
+        stage('Docker Image Cleanup: Local'){
+
+             //when {expression {params.action == 'create'}}
+
+                 steps{
+
+                     script{
+
+                         DockerImageCleanup("${params.aws_account_id}", "${params.region}", "${params.ecr_repo_name}")
+
+                     }
+
+                 }
+             }  
+    }
+}    
+
