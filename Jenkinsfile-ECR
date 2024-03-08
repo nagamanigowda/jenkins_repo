@@ -126,7 +126,7 @@ pipeline {
 
                     script{
 
-                        DockerImageScan("${params.aws_account_id}", "${params.region}", "${params.ecr_repo_name}")
+                        DockerimageScan("${params.aws_account_id}", "${params.region}", "${params.ecr_repo_name}")
                         
                     }
 
