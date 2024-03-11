@@ -10,7 +10,7 @@ pipeline {
                string(name:'aws_account_id', description: 'AWS ACCOUNT ID', defaultValue: '402213359600')
                string(name :'region', description :'aws region', defaultValue :'us-east-1')
                string(name :'ecr_repo_name', description : 'ECR repository name', defaultValue :'nagamani.n')
-               string(name :'cluster_name', description :'eks cluster name', defaultValue :'demo-cluster1')
+               string(name :'eks_cluster_name', description :'eks cluster name', defaultValue :'demo-cluster1')
 
         }
          
