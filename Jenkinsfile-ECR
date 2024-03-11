@@ -13,7 +13,7 @@ pipeline {
 
         }
          
-        environments{
+        environment{
             ACCESS_KEY = cresentials('AWS_ACCESS_KEY_ID')
             SECRET_KEY = cresentials('AWS_SECRET_KEY_TD')
         } 
