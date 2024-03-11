@@ -226,7 +226,7 @@ pipeline {
                     // }
                     // if (apply){
                         sh """
-                         kubectl apply -f . --kubeconfig /home/ubuntu/.kube/config
+                         sudo kubectl apply -f . --kubeconfig /home/ubuntu/.kube/config
 
                         """
                     }
