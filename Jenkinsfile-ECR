@@ -94,79 +94,79 @@ pipeline {
 
         //          }
         //      }
-        stage('Maven Build: maven'){
+        // stage('Maven Build: maven'){
 
-            //when {expression {params.action == 'create'}}
+        //     //when {expression {params.action == 'create'}}
 
-                steps{
+        //         steps{
 
-                    script{
+        //             script{
 
-                        mvnBuild()
+        //                 mvnBuild()
 
-                    }
+        //             }
 
-                }
-            }
-        stage('Docker Image Build: ECR'){
+        //         }
+        //     }
+        // stage('Docker Image Build: ECR'){
 
-            //when {expression {params.action == 'create'}}
+        //     //when {expression {params.action == 'create'}}
 
-                steps{
+        //         steps{
 
-                    script{
+        //             script{
 
-                        DockerBuild("${params.aws_account_id}", "${params.region}", "${params.ecr_repo_name}")
+        //                 DockerBuild("${params.aws_account_id}", "${params.region}", "${params.ecr_repo_name}")
 
-                    }
+        //             }
 
-                }
-        } 
+        //         }
+        // } 
 
-        stage('Docker Image Scan: Trivy'){
+        // stage('Docker Image Scan: Trivy'){
 
-            //when {expression {params.action == 'create'}}
+        //     //when {expression {params.action == 'create'}}
 
-                steps{
+        //         steps{
 
-                    script{
+        //             script{
 
-                        DockerimageScan("${params.aws_account_id}", "${params.region}", "${params.ecr_repo_name}")
+        //                 DockerimageScan("${params.aws_account_id}", "${params.region}", "${params.ecr_repo_name}")
                         
-                    }
+        //             }
 
-                }
-        }
+        //         }
+        // }
 
-        stage('Docker Image Push: ECR'){
+        // stage('Docker Image Push: ECR'){
 
-            //when {expression {params.action == 'create'}}
+        //     //when {expression {params.action == 'create'}}
 
-                steps{
+        //         steps{
 
-                    script{
+        //             script{
 
-                        DockerImagePush("${params.aws_account_id}", "${params.region}", "${params.ecr_repo_name}")
+        //                 DockerImagePush("${params.aws_account_id}", "${params.region}", "${params.ecr_repo_name}")
                         
-                    }
+        //             }
 
-                }
-        }
+        //         }
+        // }
 
-        stage('Docker Image Cleanup: Local'){
+        // stage('Docker Image Cleanup: Local'){
 
-             //when {expression {params.action == 'create'}}
+        //      //when {expression {params.action == 'create'}}
 
-                 steps{
+        //          steps{
 
-                     script{
+        //              script{
 
-                         DockerImageCleanup("${params.aws_account_id}", "${params.region}", "${params.ecr_repo_name}")
+        //                  DockerImageCleanup("${params.aws_account_id}", "${params.region}", "${params.ecr_repo_name}")
 
-                     }
+        //              }
 
-                 }
-        } 
+        //          }
+        // } 
 
         stage('create EKS cluster : terraform'){
                  
