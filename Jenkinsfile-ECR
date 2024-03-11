@@ -194,6 +194,7 @@ pipeline {
             steps{
                     
                 script{
+
                     withCredentials([kubeconfigFile(credentialsId: 'kubernetes_id', variable: 'KUBECONFIG')]) {    
                     sh """
                     aws configure set aws_access_key "$ACCESS_KEY"
@@ -204,8 +205,9 @@ pipeline {
                     """
                     }
                         
-            }
+                }
 
+            }
         }
 
         stage('Deployment into EKS cluster'){
