@@ -7,10 +7,10 @@ pipeline {
         parameters{
 
         //     choice(name = 'action', choices='create\ndelete', description='create or destroy')
-               string(name: 'aws_account_id', description: 'AWS ACCOUNT ID', defaultValue: '402213359600')
+               string(name:'aws_account_id', description: 'AWS ACCOUNT ID', defaultValue: '402213359600')
                string(name :'region', description :'aws region ', defaultValue :'us-east-1')
                string(name :'ecr_repo_name', description : 'ECR repository name', defaultValue :'nagamani.n')
-               string(name : 'eks_cluster_name', description : 'eks cluster name', defaultValue : 'demo-cluster1')
+               string(name :'eks_cluster_name', description :'eks cluster name', defaultValue :'demo-cluster1')
 
         }
          
@@ -188,7 +188,7 @@ pipeline {
             }
         }
 
-        stage('create EKS cluster : terraform'){
+        stage('connect to EKS Cluster : AWS'){
                  
             steps{
                     
