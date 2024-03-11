@@ -8,9 +8,9 @@ pipeline {
 
         //     choice(name = 'action', choices='create\ndelete', description='create or destroy')
                string(name:'aws_account_id', description: 'AWS ACCOUNT ID', defaultValue: '402213359600')
-               string(name :'region', description :'aws region ', defaultValue :'us-east-1')
+               string(name :'region', description :'aws region', defaultValue :'us-east-1')
                string(name :'ecr_repo_name', description : 'ECR repository name', defaultValue :'nagamani.n')
-               string(name :'eks_cluster_name', description :'eks cluster name', defaultValue :'demo-cluster1')
+               string(name :'cluster_name', description :'eks cluster name', defaultValue :'demo-cluster1')
 
         }
          
@@ -195,9 +195,9 @@ pipeline {
                 script{
                         
                     sh """
-                    aws configure set aws_access_key=$ACCESS_KEY
-                    aws configure set aws_secret_key=$SECRET_KEY
-                    aws configure set region=${params.region}
+                    aws configure set aws_access_key "$ACCESS_KEY"
+                    aws configure set aws_secret_key "$SECRET_KEY"
+                    aws configure set region "${params.region}"
                     aws eks --region ${params.region} update-kubeconfig --name ${params.eks_cluster_name}
 
                     """
