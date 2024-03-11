@@ -226,7 +226,7 @@ pipeline {
                     // }
                     // if (apply){
                         sh """
-                        kubectl apply -f . --validate=false
+                         kubectl apply -f . --kubeconfig /home/ubuntu/.kube/config
 
                         """
                     }
