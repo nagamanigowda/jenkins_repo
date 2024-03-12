@@ -194,8 +194,7 @@ pipeline {
             steps{
                     
                 script{
-
-                    withCredentials([kubeconfigFile(credentialsId: 'kubernetes_id', variable: 'KUBECONFIG')]) {    
+   
                     sh """
                     aws configure set aws_access_key "$ACCESS_KEY"
                     aws configure set aws_secret_key "$SECRET_KEY"
@@ -203,12 +202,11 @@ pipeline {
                     aws eks --region ${params.region} update-kubeconfig --name ${params.eks_cluster_name}
 
                     """
-                    }
-                        
+                    }                        
                 }
 
-            }
         }
+        
 
         stage('Deployment into EKS cluster'){
 
@@ -232,16 +230,19 @@ pipeline {
                         //  sudo kubectl apply -f . --kubeconfig /home/ubuntu/.kube/config
 
                         // """
-                    withCredentials([kubeconfigFile(credentialsId: 'kubernetes_id', variable: 'KUBECONFIG')]) {
-                        sh 'kubectl apply -f .'    
+                    withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s_id', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
+                    
+                    sh 'kubectl apply -f .'
+                    }                
+                        
                     }
                         
                 }   
 
             }
        }    
-   }
-}
+ }
+
 
     
 
