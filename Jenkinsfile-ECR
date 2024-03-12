@@ -34,144 +34,144 @@ pipeline {
                 }
             }
 
-        //     stage('Unit Test maven'){
+            stage('Unit Test maven'){
 
-        //       //when {expression {params.action == 'create'}}
+              //when {expression {params.action == 'create'}}
 
-        //        steps{
+               steps{
 
-        //            script{
+                   script{
 
-        //                mvnTest()
+                       mvnTest()
 
-        //            }
+                   }
 
-        //         }
-        //     }
+                }
+            }
         
-        // stage('Integration Test maven'){
+            stage('Integration Test maven'){
                
-        //    //when {expression {params.action == 'create'}}
+             //when {expression {params.action == 'create'}}
                            
-        //        steps{
+               steps{
 
-        //            script{
+                   script{
 
-        //                mvnIntegrationTest()
+                       mvnIntegrationTest()
                         
-        //            }
+                   }
 
-        //        }
-        //     }
+               }
+            }
 
-        // stage('static code analysis:sonarqube'){
+            stage('static code analysis:sonarqube'){
                
-        //   //when {expression {params.action == 'create'}}
+              //when {expression {params.action == 'create'}}
                            
-        //         steps{
+                steps{
 
-        //             script{
+                    script{
                         
-        //                 def sonarqubecredentialId = 'my-sonar'
-        //                 staticCodeAnalysis(sonarqubecredentialId)
+                        def sonarqubecredentialId = 'my-sonar'
+                        staticCodeAnalysis(sonarqubecredentialId)
                         
-        //             }
+                    }
 
-        //       }
-        //     } 
+              }
+            } 
 
-        // stage('Quality Gate Status:sonarqube'){
+            stage('Quality Gate Status:sonarqube'){
                
-        //    //when {expression {params.action == 'create'}}
+              //when {expression {params.action == 'create'}}
                            
-        //          steps{
+                 steps{
 
-        //             script{
+                    script{
                         
-        //                  def sonarqubecredentialId = 'my-sonar'
-        //                  QualityGateStatus(sonarqubecredentialId)
+                         def sonarqubecredentialId = 'my-sonar'
+                         QualityGateStatus(sonarqubecredentialId)
                         
-        //              }
+                     }
 
-        //          }
-        //      }
-        // stage('Maven Build: maven'){
+                 }
+             }
+            stage('Maven Build: maven'){
 
-        //     //when {expression {params.action == 'create'}}
+              //when {expression {params.action == 'create'}}
 
-        //         steps{
+                steps{
 
-        //             script{
+                    script{
 
-        //                 mvnBuild()
+                        mvnBuild()
 
-        //             }
+                    }
 
-        //         }
-        //     }
-        // stage('Docker Image Build: ECR'){
+                }
+            }
+            stage('Docker Image Build: ECR'){
 
-        //     //when {expression {params.action == 'create'}}
+            //when {expression {params.action == 'create'}}
 
-        //         steps{
+                steps{
 
-        //             script{
+                    script{
 
-        //                 DockerBuild("${params.aws_account_id}", "${params.region}", "${params.ecr_repo_name}")
+                        DockerBuild("${params.aws_account_id}", "${params.region}", "${params.ecr_repo_name}")
 
-        //             }
+                    }
 
-        //         }
-        // } 
+                }
+            } 
 
-        // stage('Docker Image Scan: Trivy'){
+            stage('Docker Image Scan: Trivy'){
 
-        //     //when {expression {params.action == 'create'}}
+            //when {expression {params.action == 'create'}}
 
-        //         steps{
+                steps{
 
-        //             script{
+                    script{
 
-        //                 DockerimageScan("${params.aws_account_id}", "${params.region}", "${params.ecr_repo_name}")
+                        DockerimageScan("${params.aws_account_id}", "${params.region}", "${params.ecr_repo_name}")
                         
-        //             }
+                    }
 
-        //         }
-        // }
+                }
+            }
 
-        // stage('Docker Image Push: ECR'){
+            stage('Docker Image Push: ECR'){
 
-        //     //when {expression {params.action == 'create'}}
+            //when {expression {params.action == 'create'}}
 
-        //         steps{
+                steps{
 
-        //             script{
+                    script{
 
-        //                 DockerImagePush("${params.aws_account_id}", "${params.region}", "${params.ecr_repo_name}")
+                        DockerImagePush("${params.aws_account_id}", "${params.region}", "${params.ecr_repo_name}")
                         
-        //             }
+                    }
 
-        //         }
-        // }
+                }
+             }
 
-        // stage('Docker Image Cleanup: Local'){
+            stage('Docker Image Cleanup: Local'){
 
-        //      //when {expression {params.action == 'create'}}
+             //when {expression {params.action == 'create'}}
 
-        //          steps{
+                 steps{
 
-        //              script{
+                     script{
 
-        //                  DockerImageCleanup("${params.aws_account_id}", "${params.region}", "${params.ecr_repo_name}")
+                         DockerImageCleanup("${params.aws_account_id}", "${params.region}", "${params.ecr_repo_name}")
 
-        //              }
+                     }
 
-        //          }
-        // } 
+                 }
+            } 
 
-        stage('create EKS cluster : terraform'){
+            stage('create EKS cluster : terraform'){
                  
-            steps{
+              steps{
                     
                 script{
                         
@@ -186,12 +186,12 @@ pipeline {
                         
                 }
 
+              }
             }
-        }
 
-        stage('connect to EKS Cluster : AWS'){
+            stage('connect to EKS Cluster : AWS'){
                  
-            steps{
+              steps{
                     
                 script{
    
@@ -204,41 +204,38 @@ pipeline {
 
                     }
                 }                        
-         }
+             }
 
-        stage('Deployment into EKS cluster'){
+            stage('Deployment into EKS cluster'){
 
             //when {expression {params.action == 'create'}}
 
-            steps{
+             steps{
 
                 script{
-                    // def apply = false
+                     def apply = false
 
-                    // try{
-                    //     input message : 'please confirm to deploy on eks', ok : 'Ready to apply the config?'
-                    //     apply true
-                    // }
-                    // catch(err){
-                    //     apply = false
-                    //     currentBuild.result = 'UNSTABLE'
-                    // }
-                    // if (apply){
-                        // sh """
-                        //  sudo kubectl apply -f . --kubeconfig /home/ubuntu/.kube/config
+                     try{
+                         input message : 'please confirm to deploy on eks', ok : 'Ready to apply the config?'
+                         apply true
+                     }
+                     catch(err){
+                         apply = false
+                         currentBuild.result = 'UNSTABLE'
+                     }
+                     if (apply){
 
-                        // """
-                    withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s_id', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
-                    
-                    sh 'kubectl apply -f .'
-                    }                
-                        
+                         sh """
+                           kubectl apply -f . 
+                         """
+                                                  
                     }
                         
                 }   
 
-            }
+             }
        }    
+    }
  }
 
 
